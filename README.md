@@ -10,7 +10,7 @@ t_michal_obdrzalek_project_SQL_primary_final – sjednocená data o mzdách a ce
 
 t_michal_obdrzalek_project_SQL_secondary_final – data o HDP evropských zemí
 
-Obecné poznámky 
+Obecné poznámky: 
 -	Data v tabulce primary_final byla sjednocena podle roku z tabulek czechia_payroll, czechia_price a příslušných číselníků. Informace o čtvrtletí/měsíci/týdnu byly záměrně vynechány.
 -	Veškeré výpočty v rámci úkolů pracují s agregovanými hodnotami za jednotlivé kalendářní roky pomocí funkce AVG.
 -	Mzdy jsou dostupné od roku 2000 do2021, ceny od roku 2006 do 2018, jejich průnik je mezi roky 2006–2018.
