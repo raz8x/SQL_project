@@ -2,6 +2,8 @@ Průvodní listina – SQL projekt: Analýza vývoje mezd, cen potravin a HDP
 
 Autor: Michal Obdržálek
 
+Discord: raz8x
+
 Databáze: engeto_local
 
 Vytvořené tabulky:
