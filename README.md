@@ -1,8 +1,13 @@
 Průvodní listina – SQL projekt: Analýza vývoje mezd, cen potravin a HDP
+
 Autor: Michal Obdržálek
+
 Databáze: engeto_local
+
 Vytvořené tabulky:
+
 t_michal_obdrzalek_project_SQL_primary_final – sjednocená data o mzdách a cenách potravin v ČR
+
 t_michal_obdrzalek_project_SQL_secondary_final – data o HDP evropských zemí
 
 Obecné poznámky 
