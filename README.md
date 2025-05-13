@@ -8,13 +8,13 @@ Databáze: engeto_local
 
 Vytvořené tabulky:
 
-t_michal_obdrzalek_project_SQL_primary_final – sjednocená data o mzdách a cenách potravin v ČR
+t_michal_obdrzalek_project_SQL_primary_final – sjednocená data o mzdách a cenách potravin v ČR s již zprůměrovanými hodnotami za daný rok
 
 t_michal_obdrzalek_project_SQL_secondary_final – data o HDP evropských zemí
 
 Obecné poznámky: 
 -	Data v tabulce primary_final byla sjednocena podle roku z tabulek czechia_payroll, czechia_price a příslušných číselníků. Informace o čtvrtletí/měsíci/týdnu byly záměrně vynechány.
--	Veškeré výpočty v rámci úkolů pracují s agregovanými hodnotami za jednotlivé kalendářní roky pomocí funkce AVG.
+-	Výpočty v rámci úkolů pracují s agregovanými hodnotami za jednotlivé kalendářní roky pomocí funkce AVG, v některých 		částech není AVG již třeba, protože data jsou zprůměrována předem v rámci výchozí tabulky
 -	Mzdy jsou dostupné od roku 2000 do 2021, ceny od roku 2006 do 2018, jejich průnik je mezi roky 2006–2018.
 -	V ostatních letech se tím pádem některá data nevyskytují.
 -	Postup výpočtů byl následující: AVG → LAG → změna %.

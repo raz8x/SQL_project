@@ -7,12 +7,13 @@
 -- Poznamky: za rok 2021 mame data pouze za prvni pololeti, ale vzhledem k tomu, ze 2021 patri do statisticky zajimaveho obdobi covidu, byla ponechana
 -- U calculation_code jsem nechal pouze kod '200' = prepocteny, tzn. prepoctena data mezd tak, aby vice odrazely napriklad polovicni ci jinak zkracene uvazky
 
+
 WITH Zmena_mzdy AS (
     SELECT
         Odvetvi,
         Rok,
-        ROUND(AVG(Mzda), 0) AS Prumerna_mzda_tento_rok,
-        LAG(ROUND(AVG(Mzda))) OVER (PARTITION BY Odvetvi ORDER BY Rok) AS Prumerna_mzda_minuly_rok
+        Mzda AS Prumerna_mzda_tento_rok,
+        LAG(Mzda) OVER (PARTITION BY Odvetvi ORDER BY Rok) AS Prumerna_mzda_minuly_rok
     FROM t_michal_obdrzalek_project_SQL_primary_final
     WHERE Mzda IS NOT NULL
     GROUP BY Odvetvi, Rok
@@ -48,8 +49,8 @@ WITH Zmena_mzdy AS (
     SELECT
         Odvetvi,
         Rok,
-        ROUND(AVG(Mzda), 0) AS Prumerna_mzda_tento_rok,
-        LAG(ROUND(AVG(Mzda))) OVER (PARTITION BY Odvetvi ORDER BY Rok) AS Prumerna_mzda_minuly_rok
+        Mzda AS Prumerna_mzda_tento_rok,
+        LAG(Mzda) OVER (PARTITION BY Odvetvi ORDER BY Rok) AS Prumerna_mzda_minuly_rok
     FROM t_michal_obdrzalek_project_SQL_primary_final
     WHERE Mzda IS NOT NULL
     GROUP BY Odvetvi, Rok
@@ -77,7 +78,7 @@ Prumery AS (
     SELECT
         Odvetvi,
         Rok,
-        AVG(Mzda) AS Prumerna_mzda
+        Mzda AS Prumerna_mzda
     FROM Ciste_mzdy
     GROUP BY Odvetvi, Rok
 ),
@@ -118,9 +119,9 @@ Ceny AS (
     SELECT 
         Rok,
         Potravina,
-        AVG(Cena) AS Prumerna_cena
+        Cena AS Prumerna_cena
     FROM t_michal_obdrzalek_project_SQL_primary_final
-    WHERE Potravina IN ('Konzumní chléb', 'Mléko polotučné pasterované')
+    WHERE Potravina IN ('Chléb konzumní kmínový', 'Mléko polotučné pasterované')
     AND Cena IS NOT NULL
     GROUP BY Rok, Potravina
 ),
@@ -165,7 +166,7 @@ WITH Ceny AS (
     SELECT 
         Rok,
         Potravina,
-        AVG(Cena) AS Prumerna_cena
+        Cena AS Prumerna_cena
     FROM t_michal_obdrzalek_project_SQL_primary_final
     WHERE Cena IS NOT NULL
     GROUP BY Rok, Potravina
@@ -209,7 +210,7 @@ WITH Ceny AS (
     SELECT 
         Rok,
         Potravina,
-        AVG(Cena) AS Prumerna_cena
+        Cena AS Prumerna_cena
     FROM t_michal_obdrzalek_project_SQL_primary_final
     WHERE Cena IS NOT NULL
     GROUP BY Rok, Potravina
@@ -263,8 +264,8 @@ Spojeno AS (
 SELECT 
     Rok,
     Prumerna_zmena_cen,
-    Procentualni_zmena_mezd,
-    (Prumerna_zmena_cen - Procentualni_zmena_mezd) AS Rozdil,
+    ROUND(Procentualni_zmena_mezd, 2),
+    ROUND((Prumerna_zmena_cen - Procentualni_zmena_mezd), 2) AS Rozdil,
     CASE WHEN (Prumerna_zmena_cen - Procentualni_zmena_mezd) > 10 THEN 'ANO' ELSE 'NE' END AS 'Rozdil_cen_a_mezd_>10_pct'
 FROM Spojeno
 ORDER BY Rok;
@@ -301,7 +302,7 @@ Mzdy_final AS (
     WHERE Predchozi_mzda IS NOT NULL
 ),
 Ceny_aggr AS (
-    SELECT Rok, Potravina, AVG(Cena) AS Prumerna_cena
+    SELECT Rok, Potravina, Cena AS Prumerna_cena
     FROM t_michal_obdrzalek_project_SQL_primary_final
     WHERE Cena IS NOT NULL
     GROUP BY Rok, Potravina
