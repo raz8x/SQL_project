@@ -37,4 +37,4 @@ SELECT
     t_ceny.Cena
 FROM t_mzdy
 LEFT JOIN t_ceny
-    ON t_mzdy.Rok = t_ceny.Rok    
+    ON t_mzdy.Rok = t_ceny.Rok;    
